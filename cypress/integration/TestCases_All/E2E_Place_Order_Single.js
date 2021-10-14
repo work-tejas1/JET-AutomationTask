@@ -82,7 +82,6 @@ describe('Place order for Test Selenium restaurant SINGLE', () => {
             expect(cookies[22]).to.have.property('name', 'pickup')
             expect(cookies[22]).to.have.property('value', 'takeaway')
         })
-        cy.pause()
         //Select and assert CASH as payment method. Assert TOTAL AMOUNT and subit order.
         checkoutPage.clickCash()
         cy.get("@Done").click()
