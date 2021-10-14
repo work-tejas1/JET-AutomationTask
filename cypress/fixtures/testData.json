@@ -1,0 +1,17 @@
+{
+    "restaurantName": "TEST Restaurant Selenium",
+    "setLocation": "Dłusko 12, 78-630 Dłusko",
+    "firstName": "UserFirstName",
+    "emailValue": "user1@test.com",
+    "phoneNumber": "11223344556",
+    "userComment": "no sugar",
+    "paymentProvider": "PayPal",
+    "finalPaymentMethod": "Cash",
+    "totalAmount": "17,95",
+    "productName": [
+        "Monster Menu",
+        "Meal One",
+        "Meal Two"
+    ],
+    "finalUrlTrackingId": "trackingid"
+}

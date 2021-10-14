@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-10-14T11:10:35.672Z",
+    "end": "2021-10-14T11:11:38.415Z",
+    "duration": 62743,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7e6890ee-3cb7-4b3d-95c0-3c9ad1b96a9e",
+      "title": "",
+      "fullFile": "cypress/integration/TestCases_All/E2E_Place_Order_Single.js",
+      "file": "cypress/integration/TestCases_All/E2E_Place_Order_Single.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d46664b3-fb6e-4fdf-865c-f00e873e0624",
+          "title": "Place order for Test Selenium restaurant SINGLE",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add items to basket",
+              "fullTitle": "Place order for Test Selenium restaurant SINGLE Add items to basket",
+              "timedOut": null,
+              "duration": 62448,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*Visit to TEST URL\n(We can set baseUrl in cypress.json file) and use: cy.visit(\"/\", { failOnStatusCode: false }). \nFor simplicity directly passing URL with custom query parameters.\n*/\ncy.visit(\"https://www.pyszne.pl/en/menu/test-restaurant-selenium?showTestRestaurants\", {\n  failOnStatusCode: false\n}); //Assert Restaurant Name, Set location and assert location\nlandingPage.restaurantName().then($restaurantName => {\n  const restaurantNameText = $restaurantName.text();\n  cy.log(restaurantNameText);\n  expect(restaurantNameText).is.eq(globalThis.data.restaurantName);\n});\nlandingPage.inputLocation().as(\"location\");\ncy.get(\"@location\").click();\nlandingPage.inputAddress().type(globalThis.data.setLocation);\nlandingPage.selectLocation();\ncy.wait(4000);\ncy.get(\"@location\").invoke(\"text\").then($enteredLocation => {\n  expect($enteredLocation).is.eq(globalThis.data.setLocation);\n});\n/*Using custom command(support/commands.js) add 3 meals to basket(from fixtures/testData) \nthen assert number of meals is eqal to 3 then add 'no sugar' comment for first meal. \nClick on checkout\n*/\nglobalThis.data.productName.forEach(function (element) {\n  cy.addProductToBasket(element);\n});\nlandingPage.cartItems().should(\"have.length\", 3);\nlandingPage.clickCommentBtnFirst();\nlandingPage.addComment().type(globalThis.data.userComment);\nlandingPage.clickAddComment(); //cy.wait(700)\nlandingPage.userComment().invoke('text').then($note => {\n  expect($note).is.eq(globalThis.data.userComment);\n});\nlandingPage.clickCheckout(); //Input user details\ncheckoutPage.fullNameInput().type(globalThis.data.firstName);\ncheckoutPage.emailInput().type(globalThis.data.emailValue);\ncheckoutPage.phoneNumberInput().type(globalThis.data.phoneNumber);\n/*Select and assert PAYPAL as payment method. Click on cancel and return.\nAssert API response length and value. (More asserations can be added)\n*/\ncheckoutPage.clickPaymentElement();\ncheckoutPage.clickPaypal();\ncheckoutPage.actionBtnDone().as(\"Done\");\ncy.get(\"@Done\").click();\ncheckoutPage.paymentMethod().first().invoke('text').then($paymentProvider => {\n  expect($paymentProvider).is.eq(globalThis.data.paymentProvider);\n});\ncheckoutPage.clickSubmit();\ncheckoutPage.clickCancelAndReturn();\ncheckoutPage.clickPaymentDetails();\ncy.waitUntil(() => cy.getCookies().should('have.length', 24));\ncy.getCookies().then(cookies => {\n  expect(cookies[22]).to.have.property('name', 'pickup');\n  expect(cookies[22]).to.have.property('value', 'takeaway');\n});\ncy.pause(); //Select and assert CASH as payment method. Assert TOTAL AMOUNT and subit order.\ncheckoutPage.clickCash();\ncy.get(\"@Done\").click();\ncheckoutPage.paymentMethod().last().invoke('text').then($cashPayment => {\n  expect($cashPayment).contains(globalThis.data.finalPaymentMethod);\n});\ncheckoutPage.submitOrder().within($sumbit => {\n  checkoutPage.orderTotalText().invoke('text').then($finalTotal => {\n    expect($finalTotal).contains(globalThis.data.totalAmount);\n  });\n});\ncheckoutPage.submitOrder().click(); //Assert: URL contain trackingid and order is placed from correct Restaurant.\ncy.url().should(\"contain\", \"trackingid\");\nfinalOrderPage.restaurantTitle().invoke('text').then($finalOrderRestaurant => {\n  expect($finalOrderRestaurant).contains(globalThis.data.restaurantName);\n});",
+              "err": {},
+              "uuid": "2290e0b8-e509-4942-9893-19c7142e2670",
+              "parentUUID": "d46664b3-fb6e-4fdf-865c-f00e873e0624",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2290e0b8-e509-4942-9893-19c7142e2670"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 62448,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": null,
+      "version": "5.2.0"
+    }
+  }
+}

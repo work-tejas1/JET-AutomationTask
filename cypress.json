@@ -1,0 +1,11 @@
+{
+    "baseUrl": "https://www.pyszne.pl/en/menu/test-restaurant-selenium?showTestRestaurants",
+    "theme": "dark",
+    "viewportWidth": 1900,
+    "viewportHeight": 1080,
+    "pageLoadTimeout": 20000,
+    "defaultCommandTimeout":10000,
+    "chromeWebSecurity": false,
+    "videoCompression": false,
+    "trashAssetsBeforeRuns": true
+}

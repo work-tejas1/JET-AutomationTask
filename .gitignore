@@ -1,0 +1,5 @@
+cypress/reports/*
+screenshots
+*.log
+reports
+node_modules
