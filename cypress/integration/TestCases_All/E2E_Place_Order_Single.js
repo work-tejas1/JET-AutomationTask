@@ -53,7 +53,7 @@ describe('Place order for Test Selenium restaurant SINGLE', () => {
         landingPage.clickCommentBtnFirst()
         landingPage.addComment().type(globalThis.data.userComment)
         landingPage.clickAddComment()
-        //cy.wait(700)
+        cy.wait(700)
         landingPage.userComment().invoke('text').then(($note) => {
             expect($note).is.eq(globalThis.data.userComment)
         })
